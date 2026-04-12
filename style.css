@@ -1,0 +1,437 @@
+/* ====== RESET & BASE ====== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #1a2744;
+  --navy-light: #2a3f66;
+  --accent: #3d6cb9;
+  --accent-hover: #2d5aa0;
+  --text: #2c2c2c;
+  --text-light: #555;
+  --text-muted: #777;
+  --bg: #fdfdfd;
+  --bg-alt: #f5f6f8;
+  --border: #e0e3e8;
+  --link: #2a5a9c;
+  --link-hover: #1a3d6e;
+  --sidebar-width: 260px;
+  --content-max: 720px;
+  --page-max: 1060px;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ====== NAVIGATION ====== */
+nav.topnav {
+  background: var(--navy);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+
+nav.topnav .brand {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+nav.topnav .brand:hover {
+  color: #dce6f5;
+  text-decoration: none;
+}
+
+nav.topnav ul {
+  list-style: none;
+  display: flex;
+  gap: 0.25rem;
+}
+
+nav.topnav ul li a {
+  color: #ccd6e6;
+  padding: 0.5rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+nav.topnav ul li a:hover,
+nav.topnav ul li a.active {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #ccd6e6;
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* ====== MAIN LAYOUT ====== */
+.page-wrapper {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+  display: flex;
+  gap: 3rem;
+}
+
+/* ====== SIDEBAR (home page) ====== */
+.sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.sidebar .profile-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  border: 3px solid var(--border);
+  background: var(--bg-alt);
+}
+
+.sidebar .quick-links {
+  font-size: 0.88rem;
+  margin-bottom: 1.2rem;
+  color: var(--text-muted);
+}
+
+.sidebar .quick-links a {
+  font-weight: 600;
+}
+
+.sidebar .quick-links span {
+  margin: 0 0.3rem;
+  color: var(--border);
+}
+
+.sidebar .name {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.3rem;
+}
+
+.sidebar .title-line {
+  font-size: 0.92rem;
+  color: var(--text-light);
+  margin-bottom: 0.15rem;
+  font-weight: 500;
+}
+
+.sidebar .email-link {
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-top: 0.5rem;
+  display: block;
+}
+
+/* ====== MAIN CONTENT ====== */
+.main-content {
+  flex: 1;
+  max-width: var(--content-max);
+  min-width: 0;
+}
+
+.bio-text {
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.cv-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ====== SECTION HEADINGS ====== */
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 2.2rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ====== PAPER LIST ====== */
+.paper-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.paper-list li {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.paper-list li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+
+.paper-list li .paper-title {
+  font-weight: 700;
+  color: var(--link);
+}
+
+.paper-list li .paper-title:hover {
+  color: var(--link-hover);
+}
+
+.paper-list li .coauthors {
+  color: var(--text-light);
+}
+
+.paper-list li .paper-detail {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+/* ====== NEWS LIST ====== */
+.news-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.news-list li a {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-light);
+  display: block;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--bg-alt);
+  transition: color 0.2s;
+}
+
+.news-list li a:hover {
+  color: var(--link);
+  text-decoration: none;
+}
+
+/* ====== FULL WIDTH PAGE (bio, research, etc.) ====== */
+.page-full {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 2.5rem 2rem 4rem;
+}
+
+.page-title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.page-full p,
+.page-full li {
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+.page-full p + p {
+  margin-top: 1rem;
+}
+
+/* ====== TABLE (teaching, bio) ====== */
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 2rem;
+}
+
+.info-table th,
+.info-table td {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-size: 0.93rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.info-table th {
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--bg-alt);
+  white-space: nowrap;
+}
+
+.info-table td {
+  color: var(--text);
+}
+
+/* ====== CONTACT PAGE ====== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.contact-card {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+.contact-card h3 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1rem;
+  color: var(--navy);
+  margin-bottom: 0.8rem;
+}
+
+.contact-card p {
+  font-size: 0.93rem;
+  line-height: 1.7;
+  color: var(--text-light);
+}
+
+/* ====== FOOTER ====== */
+footer {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  max-width: var(--page-max);
+  margin: 0 auto;
+}
+
+footer a {
+  color: var(--text-muted);
+  margin: 0 0.5rem;
+}
+
+footer a:hover {
+  color: var(--link);
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  nav.topnav {
+    padding: 0 1rem;
+  }
+
+  nav.topnav ul {
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: var(--navy);
+    flex-direction: column;
+    padding: 0.5rem 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  nav.topnav ul.open {
+    display: flex;
+  }
+
+  nav.topnav ul li a {
+    padding: 0.7rem 1.5rem;
+    display: block;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .page-wrapper {
+    flex-direction: column;
+    padding: 1.5rem 1rem 3rem;
+    gap: 2rem;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .sidebar .profile-photo {
+    width: 160px;
+    height: 160px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-full {
+    padding: 1.5rem 1rem 3rem;
+  }
+}

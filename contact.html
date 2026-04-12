@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Name | Contact</title>
+  <meta name="description" content="Contact information for [Your Name] at [Your University].">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="index.html" class="brand">Your Name</a>
+    <button class="hamburger" onclick="document.querySelector('.topnav ul').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul>
+      <li><a href="bio.html">Bio/CV</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-full">
+
+    <h1 class="page-title">Contact</h1>
+
+    <div class="contact-grid">
+
+      <div class="contact-card">
+        <h3>Email</h3>
+        <p>
+          <a href="mailto:you@university.edu">you@university.edu</a>
+        </p>
+        <p style="margin-top: 0.5rem;">
+          This is the best way to reach me. I typically respond within a few business days.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <h3>Office</h3>
+        <p>
+          Room [Number]<br>
+          Department of Economics<br>
+          [Your University]<br>
+          [Street Address]<br>
+          [City, State, Postcode]
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <h3>Office Hours</h3>
+        <p>
+          By appointment. Please send an email to schedule a meeting.
+        </p>
+        <p style="margin-top: 0.5rem;">
+          Students enrolled in my courses can book office hours through [platform/link].
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <h3>Profiles</h3>
+        <p>
+          <a href="#">Google Scholar</a><br>
+          <a href="#">GitHub</a><br>
+          <a href="#">Twitter / X</a><br>
+          <a href="#">SSRN</a>
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <a href="bio.html">Bio/CV</a> |
+    <a href="research.html">Research</a> |
+    <a href="teaching.html">Teaching</a> |
+    <a href="contact.html">Contact</a>
+  </footer>
+
+</body>
+</html>
