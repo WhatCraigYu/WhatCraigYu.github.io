@@ -18,7 +18,7 @@
   --border: #e0e3e8;
   --link: #2a5a9c;
   --link-hover: #1a3d6e;
-  --sidebar-width: 320px;
+  --sidebar-width: 260px;
   --content-max: 720px;
   --page-max: 1060px;
 }
@@ -136,8 +136,8 @@ nav.topnav ul li a.active {
 }
 
 .sidebar .profile-photo {
-  width: 300px;
-  height: 400px;
+  width: 200px;
+  height: 267px;
   border-radius: 6px;
   object-fit: cover;
   margin: 0 auto 1rem;
@@ -599,8 +599,8 @@ footer a:hover {
   }
 
   .sidebar .profile-photo {
-    width: 240px;
-    height: 320px;
+    width: 160px;
+    height: 213px;
   }
 
   .contact-grid {
