@@ -140,6 +140,7 @@ nav.topnav ul li a.active {
   height: 200px;
   border-radius: 6px;
   object-fit: cover;
+  object-position: top;
   margin: 0 auto 1rem;
   border: 3px solid var(--border);
   background: var(--bg-alt);
