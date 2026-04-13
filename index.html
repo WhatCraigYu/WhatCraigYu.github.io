@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xiaoqi Yu (余晓琪), CFA, FRM | Home</title>
+  <meta name="description" content="Academic homepage of Xiaoqi Yu, PhD Candidate in Finance at the University of Glasgow. Research in Asset Pricing, Capital Market Efficiency, and Sustainable Finance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="topnav">
+    <a href="index.html" class="brand">Xiaoqi Yu (余晓琪)</a>
+    <button class="hamburger" onclick="document.querySelector('.topnav ul').classList.toggle('open')" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul>
+      <li><a href="bio.html">Bio/CV</a></li>
+      <li><a href="research.html">Research</a></li>
+      <li><a href="teaching.html">Teaching</a></li>
+      <li><a href="experience.html">Work Experience</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- WeChat QR Popup -->
+  <div class="wechat-overlay" id="wechatOverlay" onclick="if(event.target===this)this.classList.remove('open')">
+    <div class="wechat-popup">
+      <button class="close-btn" onclick="document.getElementById('wechatOverlay').classList.remove('open')">&times;</button>
+      <h3>WeChat</h3>
+      <p>Scan to add me on WeChat</p>
+      <!-- Replace with your QR code image -->
+      <img src="contact/wechat-qr.png" alt="WeChat QR Code">
+    </div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <!-- Replace with your photo uploaded to contact/ folder -->
+      <img class="profile-photo" src="contact/photo.jpg" alt="Xiaoqi Yu">
+
+      <div class="quick-links">
+        <a href="contact/cv.pdf">CV</a>
+        <span>|</span>
+        <a href="https://linkedin.com/in/xiaoqiyu" target="_blank">LinkedIn</a>
+        <span>|</span>
+        <a onclick="document.getElementById('wechatOverlay').classList.add('open')">WeChat</a>
+        <span>|</span>
+        <a href="mailto:xiaoqi.yu@glasgow.ac.uk">Email</a>
+      </div>
+
+      <div class="name">Xiaoqi Yu (余晓琪), CFA, FRM</div>
+      <div class="title-line">PhD Candidate in Finance</div>
+      <div class="title-line">University of Glasgow</div>
+      <a class="email-link" href="mailto:xiaoqi.yu@glasgow.ac.uk">xiaoqi.yu@glasgow.ac.uk</a>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <p class="bio-text">
+        I am a PhD Candidate in Finance at the University of Glasgow, Adam Smith Business School. I will be on the job market in 2026.<br>
+        My research interests are in Asset Pricing, Capital Market Efficiency, and Sustainable Finance.
+      </p>
+
+      <a class="cv-link" href="contact/cv.pdf">Full CV here (pdf)</a>
+
+      <!-- WORKING PAPERS -->
+      <h2 class="section-heading">Working Papers</h2>
+      <ul class="paper-list">
+        <li>
+          <a class="paper-title" href="research/sentiment_io_efficiency.pdf">Investor Sentiment, Institutional Ownership, and Informational Efficiency of Prices</a>
+          <span class="abstract-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Abstract</span>
+          <div class="abstract-content">
+            Investor sentiment influences both institutional decisions and stock market efficiency, challenging the conventional positive relation between institutional ownership (IO) and the informational efficiency of US stock prices. Using stock-level sentiment beta, we predict and confirm that while institutions generally enhance price efficiency, sentiment beta attenuates the IO-Efficiency relation, particularly in the latter half of the sample (1980Q1–2022Q2) and in pessimistic quarters with low investor sentiment. Our additional analysis shows that institutions underweight high-sentiment-beta stocks. Further decomposition reveals that only fundamental-driven IO enhances price efficiency, while sentiment-beta-driven IO has no significant effect. Our findings establish a direct link between sentiment beta, institutional ownership, and price efficiency, highlighting how sentiment moderates the IO-Efficiency relation and offering new insights into behavioral limits to arbitrage.
+          </div>
+          <div class="presentations">Presentations: SFA Annual Meeting (Nov. 2025), FMA Europe Meeting (Jun. 2025), EFMA Annual Meeting (Jun. 2025)</div>
+        </li>
+        <li>
+          <a class="paper-title" href="research/real_effect_disagreement.pdf">The Real Effect of Investor Disagreement</a>
+          <span class="abstract-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Abstract</span>
+          <div class="abstract-content">
+            This paper studies the impact of investor disagreement on the market feedback effect. We argue and show that disagreement contains useful private information for managerial learning, such that it is positively associated with investment-to-Q sensitivity. This impact is more pronounced when learning is more likely to occur, namely for R&amp;D investment, for growth firms, and for firms that are less financially constrained. Our analysis based on a disagreement measure constructed from forecast revisions further substantiates this mechanism and helps mitigate reverse causality concerns. We also rule out the alternative explanation that disagreement merely reflects valuation uncertainty. Overall, the study provides evidence on the real effects of investor disagreement.
+          </div>
+          <div class="presentations">Presentations: BAFA Annual Conference (Scheduled Apr. 2026), Adam Smith Business School PhD Brownbag Seminar (Oct. 2025)</div>
+        </li>
+        <li>
+          <a class="paper-title" href="research/esg_price_informativeness.pdf">ESG Investing and Stock Price Informativeness</a>
+          <span class="abstract-toggle" onclick="this.nextElementSibling.classList.toggle('open')">Abstract</span>
+          <div class="abstract-content">
+            This study examines the impact of environmental, social, and governance (ESG) investing on stock price informativeness (PI), using 53,188 U.S. stock-quarter observations from 1996 to 2020. Price informativeness, measured as the reduction in uncertainty about future earnings based on current prices, improves with higher ESG institutional ownership. The effect is more pronounced for firms with lower ESG performance and higher ESG disclosure quality. Mechanism analysis identifies two primary channels: improved information environments, indicated by increased analyst coverage and EDGAR search volume, and long-term ESG engagement, which promotes sustainable practices and reduces uncertainty. These findings contribute to the ongoing debate on ESG investing's market implications by providing evidence that ESG ownership enhances stock price informativeness, suggesting that ESG integration strengthens market efficiency and financial stability rather than distorting price signals.
+          </div>
+          <div class="presentations">Presentations: SFA Annual Meeting (Nov. 2025), Adam Smith Business School PhD Brownbag Seminar (Nov. 2024)</div>
+        </li>
+      </ul>
+
+      <!-- NEWS -->
+      <h2 class="section-heading">News</h2>
+      <ul class="news-list">
+        <li><a href="#">On the 2026 job market</a></li>
+        <li><a href="#">Paper presented at SFA Annual Meeting, November 2025</a></li>
+        <li><a href="#">Paper presented at FMA Europe Meeting, June 2025</a></li>
+        <li><a href="#">Paper presented at EFMA Annual Meeting, June 2025</a></li>
+      </ul>
+
+    </main>
+  </div>
+
+  <footer>
+    <a href="bio.html">Bio/CV</a> |
+    <a href="research.html">Research</a> |
+    <a href="teaching.html">Teaching</a> |
+    <a href="experience.html">Work Experience</a> |
+    <a href="contact.html">Contact</a>
+  </footer>
+
+</body>
+</html>
