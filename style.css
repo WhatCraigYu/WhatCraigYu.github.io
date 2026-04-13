@@ -137,7 +137,7 @@ nav.topnav ul li a.active {
 
 .sidebar .profile-photo {
   width: 200px;
-  height: 200px;
+  height: 300px;
   border-radius: 6px;
   object-fit: cover;
   object-position: top;
