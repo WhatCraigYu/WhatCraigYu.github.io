@@ -195,6 +195,18 @@
       );
     }
 
+    // Optional inline note after paper title information
+    if (
+    typeof paper.titleNote === "string" &&
+    paper.titleNote.trim()
+    ) {
+    item.append(
+        document.createTextNode(
+        ` [${paper.titleNote.trim()}]`
+        )
+    );
+    }   
+
     // 4.4 Job Market Paper badge.
     // Controlled by the homepage configuration.
     if (settings.jobMarketPaper === paper.id) {
