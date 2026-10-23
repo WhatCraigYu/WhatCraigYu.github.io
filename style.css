@@ -238,13 +238,26 @@ nav.topnav ul li a.active {
   font-weight: bold;
 }
 
+/* Paper title: common styling */
 .paper-list li .paper-title {
   font-weight: 700;
   color: var(--link);
 }
 
-.paper-list li .paper-title:hover {
+/* Available PDF: underlined and clickable */
+.paper-list li a.paper-title {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.paper-list li a.paper-title:hover {
   color: var(--link-hover);
+}
+
+/* No PDF: plain, non-clickable title */
+.paper-list li span.paper-title {
+  text-decoration: none;
+  cursor: default;
 }
 
 .paper-list li .coauthors {
@@ -259,18 +272,23 @@ nav.topnav ul li a.active {
   margin-top: 0.2rem;
 }
 
-/* ====== ABSTRACT TOGGLE ====== */
-.abstract-toggle {
+/* ====== ABSTRACT TOGGLE & TITLE NOTE ====== */
+.abstract-toggle,
+.title-note {
   display: inline-block;
   font-size: 0.84rem;
   font-weight: 600;
   color: var(--accent);
-  cursor: pointer;
   margin-top: 0.3rem;
   padding: 0.15rem 0.5rem;
   border: 1px solid var(--accent);
   border-radius: 3px;
   background: transparent;
+}
+
+/* Interactive behaviour only for Abstract */
+.abstract-toggle {
+  cursor: pointer;
   transition: background 0.2s, color 0.2s;
   user-select: none;
 }

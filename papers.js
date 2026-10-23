@@ -151,14 +151,20 @@
   function renderPaper(paper, settings) {
     const item = createElement("li");
 
-    // 4.1 Paper title: bold, green, clickable.
+    // 4.1 Paper title: linked if PDF is available.
+    const hasPdf =
+      typeof paper.pdf === "string" &&
+      paper.pdf.trim() !== "";
+
     const title = createElement(
-      "a",
+      hasPdf ? "a" : "span",
       "paper-title",
       paper.title
     );
 
-    title.href = paper.pdf;
+    if (hasPdf) {
+      title.href = paper.pdf.trim();
+    }
 
     item.append(title);
 
@@ -197,15 +203,20 @@
 
     // Optional inline note after paper title information
     if (
-    typeof paper.titleNote === "string" &&
-    paper.titleNote.trim()
+      typeof paper.titleNote === "string" &&
+      paper.titleNote.trim()
     ) {
-    item.append(
-        document.createTextNode(
-        ` [${paper.titleNote.trim()}]`
-        )
-    );
-    }   
+      const titleNote = createElement(
+        "span",
+        "title-note",
+        paper.titleNote.trim()
+      );
+
+      item.append(
+        document.createTextNode(" "),
+        titleNote
+      );
+    }  
 
     // 4.4 Job Market Paper badge.
     // Controlled by the homepage configuration.
