@@ -294,7 +294,7 @@ nav.topnav ul li a.active {
   display: block;
 }
 
-.presentations {
+.paper-note {
   font-size: 0.86rem;
   color: var(--text-muted);
   margin-top: 0.4rem;
