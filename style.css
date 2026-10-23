@@ -294,11 +294,14 @@ nav.topnav ul li a.active {
   display: block;
 }
 
+/* Supplementary information: presentations, submission status, and notes. */
+.presentations,
 .paper-note {
   font-size: 0.86rem;
   color: var(--text-muted);
   margin-top: 0.4rem;
 }
+
 
 /* ====== NEWS LIST ====== */
 .news-list {
