@@ -251,9 +251,9 @@ nav.topnav ul li a.active {
 }
 
 .paper-list li .paper-detail {
-  font-size: 0.88rem;
-  color: var(--text-muted);
-  font-style: italic;
+  font-size: inherit;
+  color: var(--text);
+  font-style: normal;
   margin-top: 0.2rem;
 }
 
@@ -294,14 +294,22 @@ nav.topnav ul li a.active {
   display: block;
 }
 
-/* Supplementary information: presentations, submission status, and notes. */
+/* Presentations and additional notes use the same muted grey style. */
 .presentations,
 .paper-note {
   font-size: 0.86rem;
   color: var(--text-muted);
+  font-style: normal;
   margin-top: 0.4rem;
 }
 
+/* Journal submission status appears in italic, default dark text. */
+.submission-status {
+  font-size: 0.86rem;
+  color: var(--text);
+  font-style: italic;
+  margin-top: 0.4rem;
+}
 
 /* ====== NEWS LIST ====== */
 .news-list {

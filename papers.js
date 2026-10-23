@@ -153,7 +153,7 @@
         : status;
 
       item.append(createElement(
-        "div", "paper-note", line
+        "div", "submission-status", line
       ));
     }
 
