@@ -1,3 +1,4 @@
+
 /* ====== RESET & BASE ====== */
 *, *::before, *::after {
   margin: 0;
@@ -250,6 +251,7 @@ nav.topnav ul li a.active {
   color: var(--text-light);
 }
 
+/* One-sentence paper overview */
 .paper-list li .paper-detail {
   font-size: inherit;
   color: var(--text);
@@ -294,7 +296,8 @@ nav.topnav ul li a.active {
   display: block;
 }
 
-/* Presentations and additional notes use the same muted grey style. */
+/* ====== PRESENTATIONS AND NOTES ====== */
+/* Same muted grey styling for both */
 .presentations,
 .paper-note {
   font-size: 0.86rem;
@@ -303,11 +306,13 @@ nav.topnav ul li a.active {
   margin-top: 0.4rem;
 }
 
-/* Journal submission status appears in italic, default dark text. */
-.submission-status {
+/* ====== SUBMISSION STATUS ====== */
+/* Bold, italic and dark text */
+.paper-list li .submission-status {
   font-size: 0.86rem;
   color: var(--text);
   font-style: italic;
+  font-weight: 700;
   margin-top: 0.4rem;
 }
 

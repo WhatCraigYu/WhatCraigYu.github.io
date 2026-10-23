@@ -1,31 +1,78 @@
 
 /*
  * Shared paper renderer for index.html and research.html.
- * Content: papers.json
- * Page-specific choices: window.paperPageConfig in each HTML page
+ *
+ * Paper information: papers.json
+ * Page-specific settings: window.paperPageConfig
+ *
+ * Features:
+ * - Select up to three featured papers for the homepage
+ * - Display all papers on the Research page
+ * - Show coauthors and version date inline with the title
+ * - Keep the Job Market Paper badge homepage-specific
+ * - Display abstract buttons inline with the title
+ * - Show one-sentence overviews when enabled
+ * - Display submission status after the overview
+ * - Display presentations and additional notes
  */
+
 (() => {
   "use strict";
 
+  // --------------------------------------------------
+  // 1. Helper functions
+  // --------------------------------------------------
+
   function createElement(tag, className, text) {
     const element = document.createElement(tag);
-    if (className) element.className = className;
-    if (text !== undefined) element.textContent = text;
+
+    if (className) {
+      element.className = className;
+    }
+
+    if (text !== undefined) {
+      element.textContent = text;
+    }
+
     return element;
   }
 
   function formatNames(names) {
-    if (names.length === 1) return names[0];
-    if (names.length === 2) return `${names[0]} and ${names[1]}`;
-    return `${names.slice(0, -1).join(", ")}, and ${names[names.length - 1]}`;
+    if (names.length === 1) {
+      return names[0];
+    }
+
+    if (names.length === 2) {
+      return `${names[0]} and ${names[1]}`;
+    }
+
+    return (
+      `${names.slice(0, -1).join(", ")}, ` +
+      `and ${names[names.length - 1]}`
+    );
   }
 
-  function addAbstractToggle(item, paper) {
-    const toggle = createElement("span", "abstract-toggle", "Abstract");
-    const abstract = createElement("div", "abstract-content", paper.abstract);
+  // --------------------------------------------------
+  // 2. Abstract toggle
+  // --------------------------------------------------
+
+  function addAbstractToggle(paper) {
+    const toggle = createElement(
+      "span",
+      "abstract-toggle",
+      "Abstract"
+    );
+
+    const abstract = createElement(
+      "div",
+      "abstract-content",
+      paper.abstract
+    );
+
     const abstractId = `abstract-${paper.id}`;
 
     abstract.id = abstractId;
+
     toggle.setAttribute("role", "button");
     toggle.setAttribute("tabindex", "0");
     toggle.setAttribute("aria-controls", abstractId);
@@ -33,10 +80,18 @@
 
     function switchAbstract() {
       const isOpen = abstract.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
+
+      toggle.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
     }
 
-    toggle.addEventListener("click", switchAbstract);
+    toggle.addEventListener(
+      "click",
+      switchAbstract
+    );
+
     toggle.addEventListener("keydown", (event) => {
       if (event.key === "Enter" || event.key === " ") {
         event.preventDefault();
@@ -47,83 +102,132 @@
     return { toggle, abstract };
   }
 
+  // --------------------------------------------------
+  // 3. Additional notes
+  // --------------------------------------------------
+
   function addNote(item, text) {
     const note = createElement("div", "paper-note");
-    note.append(document.createTextNode(
-      /^Note:/i.test(text) ? "" : "Note: "
-    ));
 
+    // Avoid duplicating "Note:" if already included.
+    if (!/^Note:/i.test(text.trim())) {
+      note.append(
+        document.createTextNode("Note: ")
+      );
+    }
+
+    // Italicise paper titles enclosed in curly quotes.
     const quotedTitlePattern = /“[^”]+”/g;
+
     let lastIndex = 0;
 
     for (const match of text.matchAll(quotedTitlePattern)) {
-      note.append(document.createTextNode(
-        text.slice(lastIndex, match.index)
-      ));
-      note.append(createElement("em", "", match[0]));
+      note.append(
+        document.createTextNode(
+          text.slice(lastIndex, match.index)
+        )
+      );
+
+      note.append(
+        createElement("em", "", match[0])
+      );
+
       lastIndex = match.index + match[0].length;
     }
 
-    note.append(document.createTextNode(
-      text.slice(lastIndex)
-    ));
+    note.append(
+      document.createTextNode(
+        text.slice(lastIndex)
+      )
+    );
+
     item.append(note);
   }
+
+  // --------------------------------------------------
+  // 4. Render an individual paper
+  // --------------------------------------------------
 
   function renderPaper(paper, settings) {
     const item = createElement("li");
 
-    // 1. Inline title, coauthors, version date, badge and buttons.
-    const title = createElement("a", "paper-title", paper.title);
+    // 4.1 Paper title: bold, green, clickable.
+    const title = createElement(
+      "a",
+      "paper-title",
+      paper.title
+    );
+
     title.href = paper.pdf;
+
     item.append(title);
 
+    // 4.2 Coauthors: inline after the title.
     if (
       settings.showCoauthors !== false &&
       Array.isArray(paper.coauthors)
     ) {
       const names = paper.coauthors.filter(
-        (name) => typeof name === "string" && name.trim()
+        (name) =>
+          typeof name === "string" &&
+          name.trim()
       );
 
       if (names.length > 0) {
-        item.append(document.createTextNode(
-          `, with ${formatNames(names)}`
-        ));
+        item.append(
+          document.createTextNode(
+            `, with ${formatNames(names)}`
+          )
+        );
       }
     }
 
+    // 4.3 Version date: inline, without a heading.
     if (
       settings.showVersionDate !== false &&
-      paper.versionDate?.trim()
+      typeof paper.versionDate === "string" &&
+      paper.versionDate.trim()
     ) {
-      item.append(document.createTextNode(
-        `, ${paper.versionDate.trim()}`
-      ));
+      item.append(
+        document.createTextNode(
+          `, ${paper.versionDate.trim()}`
+        )
+      );
     }
 
-    // Job Market Paper badge: homepage-specific.
+    // 4.4 Job Market Paper badge.
+    // Controlled by the homepage configuration.
     if (settings.jobMarketPaper === paper.id) {
       const badge = createElement(
-        "span", "", "Job Market Paper"
+        "span",
+        "jmp-badge",
+        "Job Market Paper"
       );
 
+      // Preserve the original homepage appearance.
       badge.style.cssText =
-        "font-size: 0.82rem; font-weight: 700; color: #fff; " +
-        "background: var(--accent); padding: 0.1rem 0.5rem; " +
-        "border-radius: 3px; margin-left: 0.4rem;";
+        "font-size: 0.82rem; " +
+        "font-weight: 700; " +
+        "color: #fff; " +
+        "background: var(--accent); " +
+        "padding: 0.1rem 0.5rem; " +
+        "border-radius: 3px; " +
+        "margin-left: 0.4rem;";
 
-      item.append(document.createTextNode(" "), badge);
+      item.append(
+        document.createTextNode(" "),
+        badge
+      );
     }
 
-    // Abstract button remains inline with the title.
+    // 4.5 Abstract button: inline with title information.
     let abstractContent = null;
 
     if (
       settings.showAbstractToggle !== false &&
       paper.abstract
     ) {
-      const elements = addAbstractToggle(item, paper);
+      const elements = addAbstractToggle(paper);
 
       item.append(
         document.createTextNode(" "),
@@ -133,62 +237,92 @@
       abstractContent = elements.abstract;
     }
 
-    // 2. One-sentence overview (Research page).
-    if (settings.showOverview && paper.overview) {
-      item.append(createElement(
-        "div", "paper-detail", paper.overview
-      ));
+    // 4.6 Expanded abstract immediately below title line.
+    if (abstractContent) {
+      item.append(abstractContent);
     }
 
-    // 3. Submission status, after overview if displayed.
+    // 4.7 One-sentence overview.
+    // Normally enabled only on the Research page.
+    if (
+      settings.showOverview === true &&
+      paper.overview
+    ) {
+      item.append(
+        createElement(
+          "div",
+          "paper-detail",
+          paper.overview
+        )
+      );
+    }
+
+    // 4.8 Submission status.
+    // Appears after the overview when it is displayed.
+    // CSS: black, bold, italic.
     if (
       settings.showSubmissionStatus !== false &&
       paper.submission?.status?.trim()
     ) {
       const status = paper.submission.status.trim();
-      const journal = paper.submission.journal?.trim();
+
+      const journal =
+        paper.submission.journal?.trim();
 
       const line = journal
         ? `${status} at ${journal}`
         : status;
 
-      item.append(createElement(
-        "div", "submission-status", line
-      ));
+      item.append(
+        createElement(
+          "div",
+          "submission-status",
+          line
+        )
+      );
     }
 
-    // 4. Expanded abstract content.
-    if (abstractContent) {
-      item.append(abstractContent);
-    }
-
-    // 5. Presentations.
+    // 4.9 Conference presentations.
     if (
       settings.showPresentations !== false &&
       Array.isArray(paper.presentations)
     ) {
-      const presentations = paper.presentations.filter(Boolean);
+      const presentations =
+        paper.presentations.filter(Boolean);
 
       if (presentations.length > 0) {
-        item.append(createElement(
-          "div",
-          "presentations",
-          `Presentations: ${presentations.join(", ")}`
-        ));
+        item.append(
+          createElement(
+            "div",
+            "presentations",
+            `Presentations: ${presentations.join(", ")}`
+          )
+        );
       }
     }
 
-    // 6. Additional notes.
-    if (settings.showNotes !== false && paper.note) {
-      addNote(item, paper.note);
+    // 4.10 Additional notes.
+    if (
+      settings.showNotes !== false &&
+      typeof paper.note === "string" &&
+      paper.note.trim()
+    ) {
+      addNote(item, paper.note.trim());
     }
 
     return item;
   }
 
+  // --------------------------------------------------
+  // 5. Load papers.json and render the paper list
+  // --------------------------------------------------
+
   async function loadPapers() {
     const settings = window.paperPageConfig;
-    if (!settings?.containerId) return;
+
+    if (!settings?.containerId) {
+      return;
+    }
 
     const container = document.getElementById(
       settings.containerId
@@ -198,6 +332,7 @@
       console.error(
         `Paper list container not found: ${settings.containerId}`
       );
+
       return;
     }
 
@@ -223,26 +358,32 @@
 
       let papersToShow = data.papers;
 
-      // Homepage: display selected papers in specified order.
+      // Homepage: select up to three specified papers.
       if (Array.isArray(settings.featuredPapers)) {
         const byId = new Map(
-          data.papers.map((paper) => [paper.id, paper])
+          data.papers.map(
+            (paper) => [paper.id, paper]
+          )
         );
 
         const chosenIds = [
           ...new Set(settings.featuredPapers)
         ].slice(0, 3);
 
-        papersToShow = chosenIds.map((id) => {
-          if (!byId.has(id)) {
-            console.warn(
-              `Featured paper ID not found: ${id}`
-            );
-          }
-          return byId.get(id);
-        }).filter(Boolean);
+        papersToShow = chosenIds
+          .map((id) => {
+            if (!byId.has(id)) {
+              console.warn(
+                `Featured paper ID not found: ${id}`
+              );
+            }
+
+            return byId.get(id);
+          })
+          .filter(Boolean);
       }
 
+      // Display paper entries.
       container.replaceChildren(
         ...papersToShow.map(
           (paper) => renderPaper(paper, settings)
@@ -251,7 +392,8 @@
 
     } catch (error) {
       console.error(
-        "Unable to display research papers:", error
+        "Unable to display research papers:",
+        error
       );
 
       container.replaceChildren(
@@ -264,11 +406,17 @@
     }
   }
 
+  // --------------------------------------------------
+  // 6. Initialise when the page is ready
+  // --------------------------------------------------
+
   if (document.readyState === "loading") {
     document.addEventListener(
-      "DOMContentLoaded", loadPapers
+      "DOMContentLoaded",
+      loadPapers
     );
   } else {
     loadPapers();
   }
+
 })();
